@@ -1,6 +1,8 @@
-FROM python:3.6
+FROM centos/python-36-centos7
 
 # Python 3.6 Centos7 image with Oracle Instant Client installed
+
+USER root
 
 # install dev tools 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
