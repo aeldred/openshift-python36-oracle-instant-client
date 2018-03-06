@@ -2,6 +2,7 @@ FROM centos/python-36-centos7
 
 # Python 3.6 Centos7 image with Oracle Instant Client installed
 
+# change Docker user to root
 USER root
 
 # install dev tools 
@@ -30,5 +31,8 @@ COPY oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm /tmp/oraclelibs/orac
 RUN cd /tmp/oraclelibs && \
     rpm -Uvh oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm && \
     rpm -Uvh oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm 
+
+# change back to the regular user
+USER 1001
 
 ENV ORACLE_HOME /usr/lib/oracle/12.2/client64/lib
