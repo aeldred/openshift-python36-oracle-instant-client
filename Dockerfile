@@ -33,6 +33,9 @@ RUN cd /tmp/oraclelibs && \
     rpm -Uvh oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm 
 
 # change back to the regular user
-USER 1001
-
 ENV ORACLE_HOME /usr/lib/oracle/12.2/client64/lib
+
+# set the oracle library path
+ENV LD_LIBRARY_PATH /usr/lib/oracle/12.2/client64/lib:${LD_LIBRARY_PATH}
+
+USER 1001
