@@ -6,21 +6,12 @@ FROM centos/python-36-centos7
 #USER root
 
 # install dev tools 
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --enable rhel-7-server-rpms && \
-	yum-config-manager --enable rhel-7-server-eus-rpms && \
-    yum-config-manager --enable rhel-7-server-optional-rpms && \	
-    yum -y groupinstall 'Development Tools' && \
-    yum clean all
-	
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --enable rhel-7-server-rpms && \
-	yum-config-manager --enable rhel-7-server-eus-rpms && \
-    yum-config-manager --enable rhel-7-server-optional-rpms && \	
-	INSTALL_PKGS="wget libaio-devel" && \
-    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
+RUN INSTALL_PKGS="wget libaio-devel" && \
+    yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
-    yum clean all
+    # Remove centos-logos (httpd dependency) to keep image size smaller.
+    rpm -e --nodeps centos-logos && \
+    yum -y clean all --enablerepo='*'
 
 
 # install the Oracle dependencies./tmp/oracle_fdw-ORACLE_FDW_2_0_0/oracle_fdw.control
