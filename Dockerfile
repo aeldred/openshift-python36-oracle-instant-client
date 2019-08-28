@@ -3,7 +3,7 @@ FROM centos/python-36-centos7
 # Python 3.6 Centos7 image with Oracle Instant Client installed
 
 # change Docker user to root
-USER root
+#USER root
 
 # install dev tools 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
